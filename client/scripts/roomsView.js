@@ -11,7 +11,7 @@ var RoomsView = {
 
   renderRoom: function(roomName) {
     let template = `
-      <option name=${roomName}>${roomName}</roomName>
+      <option name=${roomName}>${roomName}</option>
   `
   RoomsView.$select.prepend(template); 
   }

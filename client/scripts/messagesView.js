@@ -6,7 +6,7 @@ var MessagesView = {
     $('.username').on('click', Friends.toggleStatus);
   },
 
-  renderMessage: function() {
+  renderMessage: function(message) {
     let template = `
     <div class="chat">
       <div class="username"> ${_.escape(message.username)}</div>

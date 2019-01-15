@@ -1,8 +1,11 @@
 var App = {
 
   $spinner: $('.spinner img'),
-
+  lastId: '',
   username: 'anonymous',
+
+  currentRoom: 'lobby',
+  lastMsg: '',
 
   initialize: function() {
     App.username = window.location.search.substr(10);
@@ -14,14 +17,26 @@ var App = {
     // Fetch initial batch of messages
     App.startSpinner();
     App.fetch(App.stopSpinner);
-
+    setInterval(App.fetch, 5000);
   },
 
   fetch: function(callback = () => {}) {
-    Parse.readAll((data) => {
+    Parse.readAll(({results}) => {   //{results} same as allTheData.results
       // examine the response from the server request:
-      console.log(data);
-
+      let messages = [];
+      for (let i = 0; i < 10; i++) {
+        let currentMsg = results[i];
+        if (App.lastId === currentMsg.objectId) {
+          i = 10;
+        } else {
+          messages.push(currentMsg);   
+        } 
+      }
+      for (let x = messages.length - 1; x >= 0; x--) {
+        let message = results[x];
+        App.lastId = message.objectId;
+        MessagesView.renderMessage(message);
+      }
       callback();
     });
   },

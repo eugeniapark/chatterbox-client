@@ -1,4 +1,5 @@
-var Messages = {
+var Messages = { 
+    messages: [],
 
 
 };

@@ -1,7 +1,7 @@
 var FormView = {
 
   $form: $('form'),
-  $message: $('message'), 
+  $message: $('#message'), 
 
   initialize: function() {
     FormView.$form.on('submit', FormView.handleSubmit);
@@ -17,6 +17,7 @@ var FormView = {
       text: FormView.$message.val(),
       roomname: 'lobby',
     }
+    console.log (message)
     FormView.$message.val('')
     Parse.create(message, App.fetch)
   },
