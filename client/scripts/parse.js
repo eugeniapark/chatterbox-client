@@ -8,10 +8,14 @@ var Parse = {
       type: 'POST',
       data: JSON.stringify(message),
       contentType: 'application/json',
-      success: successCB,
-      error: errorCB || function(error) {
+      success: function (data) {
+        successCB ();
+        console.log ('chatterbox: Message Sent')
+      },
+      error: function (error) {
+        errorCB ();
         console.error('chatterbox: Failed to fetch messages', error);
-      }
+        }
     });
   },
 

@@ -1,6 +1,7 @@
 var FormView = {
 
   $form: $('form'),
+  $message: $('message'), 
 
   initialize: function() {
     FormView.$form.on('submit', FormView.handleSubmit);
@@ -11,6 +12,13 @@ var FormView = {
     event.preventDefault();
     
     console.log('click!');
+    let message = {
+      username: App.username, 
+      text: FormView.$message.val(),
+      roomname: 'lobby',
+    }
+    FormView.$message.val('')
+    Parse.create(message, App.fetch)
   },
 
   setStatus: function(active) {
