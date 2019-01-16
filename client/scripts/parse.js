@@ -1,8 +1,8 @@
-var Parse = {
+var Parse = {  //Interacts w/ Server
 
   server: `http://parse.${window.CAMPUS}.hackreactor.com/chatterbox/classes/messages`,
 
-  create: function(message, successCB, errorCB = null) {    // todo: save a message to the server
+  create: function(message, successCB, errorCB = null) {    // POSTS: saves a message to the server -->
     $.ajax({
       url: Parse.server,
       type: 'POST',
@@ -19,7 +19,7 @@ var Parse = {
     });
   },
 
-  readAll: function(successCB, errorCB = null) {
+  readAll: function(successCB, errorCB = null) {  //GET: receives info <-- Server
     $.ajax({
       url: Parse.server,
       type: 'GET',

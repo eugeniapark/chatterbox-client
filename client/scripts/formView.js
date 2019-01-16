@@ -17,7 +17,6 @@ var FormView = {
       text: FormView.$message.val(),
       roomname: 'lobby',
     }
-    console.log (message)
     FormView.$message.val('')
     Parse.create(message, App.fetch)
   },

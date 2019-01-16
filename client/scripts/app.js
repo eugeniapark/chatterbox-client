@@ -1,4 +1,4 @@
-var App = {
+var App = {  //Application -- *gets invoked end of index.html after script loads
 
   $spinner: $('.spinner img'),
   lastId: '',
@@ -7,7 +7,7 @@ var App = {
   currentRoom: 'lobby',
   lastMsg: '',
 
-  initialize: function() {
+  initialize: function() {  //Initializes App components
     App.username = window.location.search.substr(10);
 
     FormView.initialize();
@@ -17,7 +17,27 @@ var App = {
     // Fetch initial batch of messages
     App.startSpinner();
     App.fetch(App.stopSpinner);
-    setInterval(App.fetch, 5000);
+    
+    $('#rooms button').on('click', function(){
+      let room = {
+        username: App.username,
+        text: `new room called ${$('#message').val()} created`,
+        roomname: $('#message').val()
+      };
+      RoomsView.renderRoom(room);
+    });
+
+    $('#rooms button').click(function() {
+      RoomsView.addRoom(); 
+    })
+    RoomsView.$select.on('change', function () {
+      $('#chats').empty();
+      MessagesView.initialize(Messages, RoomsView.$select.val());
+    })
+    
+    
+    setInterval(App.fetch, 5000);  //*updates every 5 seconds
+
   },
 
   fetch: function(callback = () => {}) {

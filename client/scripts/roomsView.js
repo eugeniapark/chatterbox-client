@@ -1,5 +1,5 @@
 //MVC View
-var RoomsView = {
+var RoomsView = {  //
 
   $button: $('#rooms button'),
   $select: $('#rooms select'),
@@ -13,7 +13,18 @@ var RoomsView = {
     let template = `
       <option name=${roomName}>${roomName}</option>
   `
-  RoomsView.$select.prepend(template); 
+  RoomsView.$select.append(template); 
+  },
+
+  addRoom: function() {  //sends Server 
+    RoomsView.renderRoom($('#message').val());  //bug: renders to chat
+    let newMessage = {
+      username: App.username,
+      text: `new room called ${$('#message').val()} has been created`,
+      roomname: $('#message').val()
+    }
+
+    Parse.create(newMessage, App.fetch);  //sends message to Server, gets info (messages) and renders
   }
 
 };
